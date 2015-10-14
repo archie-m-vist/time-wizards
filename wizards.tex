@@ -10,11 +10,15 @@
 \usepackage{wrapfig}
 \usepackage{hyperref}
 
+\hypersetup{
+     colorlinks = true
+}
+
 \newcommand{\twsse}{\emph{Time Wizards: The Sober and Serious Edition}}
 \newcommand{\tw}{\emph{Time Wizards}}
 \newcommand{\sse}{\emph{Sober and Serious Edition}}
 \newcommand{\rfe}{\emph{Revised First Edition}}
-\newcommand{\vers}{Version $0.1.0 \alpha$}
+\newcommand{\vers}{Version $0.1.1 \beta$}
 
 \tikzstyle{decision} = [diamond, draw, 
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
@@ -42,12 +46,10 @@ shenanigans as traditional \tw{} while being more accessible to a general tablet
 
 This ``edition'' is very much a work in progress, and any playtest information you have is very
 welcome; \namefag{Time Wizard Archibald}, the main author of this document, can be contacted with
-any feedback at \verb|archie.m.vist@gmail.com|. Expect this document to expand and contract as
-the rules finalise. Also expect the formatting to improve as I take more time to actually block
-things out and organise things.
+any feedback at \verb|archie.m.vist@gmail.com|. The latest version of the document 
 
-For reference, this is version \vers{} of \twsse. See versions on the github for version
-differences.
+For reference, this is version \vers{} of \twsse. This adds several tables and balance changes
+for Core Attribute-heavy builds, as well as a more detailed explanation of Time Moments.
 
 \section{Differences from \emph{Time Wizards: Revised First Edition}}
 This section assumes some familiarity with \emph{Time Wizards: Revised First Edition}. If you're
@@ -58,8 +60,8 @@ The basics of character creation remain the same as in \rfe{}: each character se
 the noun'' phrases from lists provided by the Time Master, which serve as their Time Wizard
 powers. Added in \sse{} are two numeric values, which are given values from 1-9 and must sum to
 10. These characteristics determine the scale and variety of effects that a Time Wizard's powers
-can achieve. For the particulars on characteristics and their uses, see the \textbf{Choose
-Characteristics} section under \textbf{Character Creation}.
+can achieve. For the particulars on characteristics and their uses, see
+\hyperref[ssec:get-characteristics] {Determine Characteristics}.
 
 In terms of mechanics, the classic \rfe{} of \tw{} is a completely different game from \sse{}.
 In particular, the entire dice slap system from classic \tw{} has been removed; while some may
@@ -74,7 +76,7 @@ has the physical constitution of a gnome who bathes in burnt othur fumes, and ma
 do not, switching to a strictly dice-based system evens the playing field for him and others with
 delicate lady hands.
 
-For the new power mechanics, see the \textbf{Time Moments} section.
+For the new power mechanics, see \hyperref[sec:time-moment]{Time Moments}.
 
 The referenced sections should be sufficient for someone familiar with \emph{Time Wizards:
 Revised First Edition} to play \sse{}.
@@ -158,9 +160,10 @@ powers all require at least one Posit be spent.
 \end{wraptable}
 
 Power is more straightforward: you can spend a point of power to either add a single d6 to your
-roll to activate a power. By default, you roll 2d6; the maximum number of dice you can add is
-equal to your Core Attribute. The maximum number of dice you can roll is given in the nearby
-table under Dice Cap.
+roll to activate a power, or to increase the breadth of the power you are using. The maximum
+number of dice you can roll is given in the nearby table under Dice Cap; power to breadth
+conversion is up to the TM, but general suggestions are given in
+\hyperref[tab:powersize]{Table \ref*{tab:powersize}: Power to Size Guidelines}.
 
 In general, have more Will if you think you want broad, reliable powers that are relatively
 straightforward, and have more Core Attribute if you want powers to be highly versatile at the
@@ -306,7 +309,7 @@ the rest of the active Time Wizards in some order from there. (While the TM can 
 suggest clockwise order or some other standard to keep things somewhat consistent.) These rolls
 are opposed by another roll from the TM, based on the Order of the situation.
 
-The more ordered and controlled a situation is, the more the Time Wizards thrive in it. If a
+The more chaotic and disorderly a situation is, the more the Time Wizards thrive in it. If a
 situation is already frantic and chaotic, the relative influence of the Time Wizards'
 reality-breaking powers isn't as obvious, and the universe puts up less resistance. The amount
 of resistance to Time Wizard interference exhibited by the environment is referred to as the
