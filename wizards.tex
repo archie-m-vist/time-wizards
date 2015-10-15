@@ -9,6 +9,8 @@
 \usepackage[normalem]{ulem}
 \usepackage{wrapfig}
 \usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{epigraph}
 
 \hypersetup{
      colorlinks = true
@@ -18,7 +20,7 @@
 \newcommand{\tw}{\emph{Time Wizards}}
 \newcommand{\sse}{\emph{Sober and Serious Edition}}
 \newcommand{\rfe}{\emph{Revised First Edition}}
-\newcommand{\vers}{Version $0.1.1 \beta$}
+\newcommand{\vers}{$0.2.0 \beta$}
 
 \tikzstyle{decision} = [diamond, draw, 
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
@@ -37,8 +39,18 @@
 \includepdf[fitpaper]{cover}
 \cleardoublepage
 
-\section{Introduction}
-Hello, and welcome to \sout{a wall of fucking text} \twsse{}, a game for serious individuals
+\setcounter{tocdepth}{2}
+\tableofcontents
+\cleardoublepage
+
+\section{The Game of \tw{}} \label{sec:gameintro}
+\epigraph{\textbf{Why should you play \tw{}?} You should not play \tw{}.}
+   {\emph{Time Wizards: Classic Edition}}
+\tw{} is equal parts tabletop game and improv comedy routine, in which players use a ridiculous
+mockery of logic to 
+
+\section{About This Document} \label{sec:rulesintro}
+This document details the rules of what we call \twsse{}, a game for serious individuals
 with serious lives. At least, by the standards of \tw{} players, which is sort of like saying
 ``a particularly Chaotic sort of paladin'' or ``a very healthy lich''. As the name might 
 somewhat jokingly) suggest, \sse{} is an attempt at producing a game with similar potential for
@@ -46,10 +58,10 @@ shenanigans as traditional \tw{} while being more accessible to a general tablet
 
 This ``edition'' is very much a work in progress, and any playtest information you have is very
 welcome; \namefag{Time Wizard Archibald}, the main author of this document, can be contacted with
-any feedback at \verb|archie.m.vist@gmail.com|. The latest version of the document 
+any feedback at \verb|archie.m.vist@gmail.com|. The latest version of the document is available
+on GitHub at \url{https://github.com/archie-m-vist/time-wizards/releases}.
 
-For reference, this is version \vers{} of \twsse. This adds several tables and balance changes
-for Core Attribute-heavy builds, as well as a more detailed explanation of Time Moments.
+For reference, this is version \vers{} of \twsse. %TODO: write version changes
 
 \section{Differences from \emph{Time Wizards: Revised First Edition}}
 This section assumes some familiarity with \emph{Time Wizards: Revised First Edition}. If you're
@@ -61,7 +73,7 @@ the noun'' phrases from lists provided by the Time Master, which serve as their 
 powers. Added in \sse{} are two numeric values, which are given values from 1-9 and must sum to
 10. These characteristics determine the scale and variety of effects that a Time Wizard's powers
 can achieve. For the particulars on characteristics and their uses, see
-\hyperref[ssec:get-characteristics] {Determine Characteristics}.
+\nameref{ssec:get-characteristics}.
 
 In terms of mechanics, the classic \rfe{} of \tw{} is a completely different game from \sse{}.
 In particular, the entire dice slap system from classic \tw{} has been removed; while some may
@@ -76,12 +88,12 @@ has the physical constitution of a gnome who bathes in burnt othur fumes, and ma
 do not, switching to a strictly dice-based system evens the playing field for him and others with
 delicate lady hands.
 
-For the new power mechanics, see \hyperref[sec:time-moment]{Time Moments}.
+For the new power mechanics, see \nameref{sec:time-moment}.
 
 The referenced sections should be sufficient for someone familiar with \emph{Time Wizards:
 Revised First Edition} to play \sse{}.
 
-\section{Setting Up}
+\section{Setting Up} \label{sec:setup}
 First, it is absolutely pivotal to begin a game of \tw{}, no matter what edition, with a loud
 and joyous cry of \emph{``¡mientras tanto, los MAGOS DEL TIEMPO!''}. If you can't even pretend
 to speak Spanish, any local equivalent of ``Meanwhile, the Time Wizards!'' is acceptable.
@@ -204,7 +216,8 @@ of a Time Moment} shows the general structure of a Time Moment in \twsse{}.
 
    \begin{tikzpicture}
       \node [block, fill=red!20] (init) {Time Moment Declared};
-      \node [decision, below of=init, fill=red!20] (determine) {Did You Declare?};
+      \node [decision, below of=init, fill=red!20, node distance=0.4\textwidth] (determine)
+         {Did You Declare?};
       \node [decision, right of=determine, fill=red!20] (decide) {Use Power?};
       \node [block, right of=decide, node distance=0.2\textwidth, fill=red!20] (posits)
          {Replenish Posits};
@@ -216,11 +229,15 @@ of a Time Moment} shows the general structure of a Time Moment in \twsse{}.
          {Roll Phase};
       \node [block, above of=roll, node distance=0.2\textwidth, fill=Cyan!30] (resolve)
          {Resolve Powers};
-      \node [decision, above of=resolve, node distance=0.2\textwidth, fill=blue!20]
+      \node [decision, above of=resolve, node distance=0.2\textwidth, fill=blue!20] (paradox)
+         {Paradox?};
+      \node [block, left of=paradox, node distance=0.2\textwidth, fill=blue!20] (parapower)
+         {Replenish Power};
+      \node [decision, above of=paradox, node distance=0.2\textwidth, fill=RoyalPurple!20]
          (dilate) {Dilate Time?};
-      \node [block, right of=dilate, node distance=0.2\textwidth, fill=RoyalPurple!30] (done)
+      \node [block, right of=dilate, node distance=0.2\textwidth, fill=black!20] (done)
          {Time Resumes};
-      \node [block, left of=dilate, node distance=0.2\textwidth, fill=blue!20] (new)
+      \node [block, left of=dilate, node distance=0.2\textwidth, fill=RoyalPurple!20] (new)
          {Dilated Time Moment};
 
       \path [line] (init) -> (determine);
@@ -235,19 +252,22 @@ of a Time Moment} shows the general structure of a Time Moment in \twsse{}.
       \path [line] (posits) -> (resolve);
       \path [line] (declare) -> (roll);
       \path [line] (roll) -> (resolve);
-      \path [line] (resolve) -> (dilate);
+      \path [line] (resolve) -> (paradox);
+      \path [line] (paradox) -> node [left of=start, node distance=0.02\textwidth] {no} (dilate);
+      \path [line] (paradox) -> node [above of=start, node distance=0.02\textwidth] {yes}
+         (parapower);
       \path [line] (dilate) -> node [above of=start, node distance=0.02\textwidth] {yes} (new);
-      \path [line] (dilate) -> node [above of=start, node distance=0.02\textwidth] {no} (done);
+      \path [line] (dilate) -> node [above of=start, node distance=0.02\textwidth] {no} (done);)
+      \path [line] (parapower) -> (new);
       \path [line] (new) -> (init);
    \end{tikzpicture}
 \end{figure}
 
 The colours in the figure indicate a grouping according to the section in the rules: red is
-covered under \hyperref[ssec:begin-moment]{Beginning a Time Moment}, yellow under \hyperref
-[ssec:power-declaration]{Power Declaration}, green under \hyperref[ssec:roll-phase]
-{The Roll Phase}, cyan under \hyperref[ssec:resolve-power]{Power Resolution}, blue under 
-\hyperref[ssec:time-dilation]{Time Dilation}, and purple under \hyperref[ssec:end-moment]{Ending
-a Time Moment}.
+covered under \nameref{ssec:begin-moment}, yellow under \nameref{ssec:power-declaration}, green
+under \nameref{ssec:roll-phase}, cyan under \nameref{ssec:resolve-power}, blue under
+\nameref{ssec:time-paradox}, purple under \nameref{ssec:time-dilation}, and
+\nameref{ssec:end-moment}.
 
 \subsection{Beginning a Time Moment} \label{ssec:begin-moment}
 A Time Wizard may declare a Time Moment at any time for the cost of one Posit; if they have no
@@ -362,6 +382,20 @@ Wizard first declared their power.
 Resolve powers in the order that dice were rolled. When all powers have been resolved, the
 players have a choice: either have the Time Moment end, causing all consequences from it to
 occur, or to enter Time Dilation.
+
+\subsection{Time Paradoxes} \label{ssec:time-paradox}
+If the resolution of a power would cause something impossible to occur, such as a Time Wizard
+being in a future version of a city the Time Wizards have erased from existence, each Time
+Wizard regains one third of their Power (rounded down) as if a new Time Moment were to begin,
+and the Time Wizards automatically enter a Dilated Time Moment (see the
+\nameref{ssec:time-dilation}) subsection, next). This is called a Time Paradox; in general,
+setting up a Time Paradox should require a great deal of Posits from players, though this is at
+the TM's discretion. Time will continue to dilate automatically until all paradoxes in a Time
+Moment have been resolved.
+
+A Dilated Time Moment caused by a paradox is treated as if the player whose power most directly
+caused the paradox declared the Time Moment, and otherwise acts like all other Dilated Time
+Moments as explained below.
 
 \subsection{Time Dilation} \label{ssec:time-dilation}
 At the end of a Time Moment, if circumstances are unfavourable to the Time Wizards, one may
