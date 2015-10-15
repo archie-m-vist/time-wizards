@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[twoside]{article}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
@@ -12,6 +12,8 @@
 \usepackage{tcolorbox}
 \usepackage{epigraph}
 
+\newcommand{\mientrastanto}{``!`mientras tanto, los MAGOS DEL TIEMPO!''}
+
 \hypersetup{
      colorlinks = true
 }
@@ -21,6 +23,9 @@
 \newcommand{\sse}{\emph{Sober and Serious Edition}}
 \newcommand{\rfe}{\emph{Revised First Edition}}
 \newcommand{\vers}{$0.2.0 \beta$}
+
+\newtoggle{paper}
+\toggletrue{paper}
 
 \tikzstyle{decision} = [diamond, draw, 
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
@@ -32,28 +37,54 @@
 \newcommand{\anon}[1][]{{\color{anongreen} \textbf{Anonymous}#1}}
 \newcommand{\namefag}[2][]{{\color{anongreen} \textbf{#2}#1}}
 
+\newenvironment{examplebox}[1]{\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title={Example: #1}]}{\end{tcolorbox}\vspace{-30pt}}
+
 \AtBeginDocument{\let\textlabel\label}
 
 \begin{document}
 
 \includepdf[fitpaper]{cover}
+\pagestyle{empty}
 \cleardoublepage
 
 \setcounter{tocdepth}{2}
 \tableofcontents
 \cleardoublepage
 
-\section{The Game of \tw{}} \label{sec:gameintro}
+\pagestyle{plain}
+\setcounter{page}{1}
+
+\section{Introduction} \label{sec:intro}
+\subsection{The Game of \tw{}} \label{ssec:gameintro}
 \epigraph{\textbf{Why should you play \tw{}?} You should not play \tw{}.}
    {\emph{Time Wizards: Classic Edition}}
 \tw{} is equal parts tabletop game and improv comedy routine, in which players use a ridiculous
-mockery of logic to 
+mockery of logic and reality-bending everyday tasks to accomplish an objective set by the Time
+Master (TM). The success or failure of any individual task is determined by dice; the scope and
+nature of the tasks are determined largely only by player imagination.
 
-\section{About This Document} \label{sec:rulesintro}
+\tw{} is not a game where dice determine outcomes; the dice only determine who determines the
+result. Rather than picking out the best numbers and most useful rules, \tw{} players should
+try and have a good grasp of lateral thinking, some understanding of the rules of logic, and
+access to a thesaurus. Knowing what to say and how to say it will do far more for you than
+probability calculations.
+
+\tw{} is a short game: a typical session might last an hour, while a long session would run two.
+It's not something you get together specifically to play, but something played to pass the time
+while your usual GM naps, while you're waiting for the pizza to arrive, or after the main event
+is over and a few people are still lingering around their chairs.
+
+\tw{} is not about the destination: it's pretty easy to get whatever the players want done, done
+eventually. The appeal isn't in accomplishing what you set out to do, it's in the ridiculous
+complications that are inevitably introduced by the whims of the dice gods and the sheer chaos
+a group of Time Wizards leave in their wake. A simple trip to the local florist may well end in
+the party clinging desperately to a rampaging Hypercorgi as it gnaws curiously on Big Ben.
+
+\subsection{About This Document} \label{ssec:rulesintro}
 This document details the rules of what we call \twsse{}, a game for serious individuals
 with serious lives. At least, by the standards of \tw{} players, which is sort of like saying
 ``a particularly Chaotic sort of paladin'' or ``a very healthy lich''. As the name might 
-somewhat jokingly) suggest, \sse{} is an attempt at producing a game with similar potential for
+(somewhat jokingly) suggest, \sse{} is an attempt at producing a game with similar potential for
 shenanigans as traditional \tw{} while being more accessible to a general tabletop audience.
 
 This ``edition'' is very much a work in progress, and any playtest information you have is very
@@ -61,9 +92,11 @@ welcome; \namefag{Time Wizard Archibald}, the main author of this document, can 
 any feedback at \verb|archie.m.vist@gmail.com|. The latest version of the document is available
 on GitHub at \url{https://github.com/archie-m-vist/time-wizards/releases}.
 
-For reference, this is version \vers{} of \twsse. %TODO: write version changes
+For reference, this is version \vers{} of \twsse. This version introduces time paradox
+mechanics, reorganises several sections, and introduces a series of play examples.
 
-\section{Differences from \emph{Time Wizards: Revised First Edition}}
+\iftoggle{paper}{}{
+\subsection{Differences from \emph{Time Wizards: Revised First Edition}} \label{ssec:verdiff}
 This section assumes some familiarity with \emph{Time Wizards: Revised First Edition}. If you're
 playing \tw{} for the first time using \sse{} for some reason, feel free to skip to the next
 section.
@@ -83,27 +116,48 @@ for several reasons: first and foremost, to make the game more accessible. As a 
 easier to pitch to a group than a game of \rfe{} or other slap system \tw{}.
 
 Further, a slap system offers a significant advantage to those with stronger physical
-characteristics, such as longer arms or better pain tolerance. As \namefag{Time Wizard Archibald}
-has the physical constitution of a gnome who bathes in burnt othur fumes, and many other people
-do not, switching to a strictly dice-based system evens the playing field for him and others with
-delicate lady hands.
+characteristics, such as longer arms or better pain tolerance; the shift to a dice-based system
+helps balance things physically, something typically welcomed by a group of the sort of people
+who gather around a table of dice and pretend to be wizards.
 
 For the new power mechanics, see \nameref{sec:time-moment}.
 
 The referenced sections should be sufficient for someone familiar with \emph{Time Wizards:
-Revised First Edition} to play \sse{}.
+Revised First Edition} to play \sse{}.}
 
 \section{Setting Up} \label{sec:setup}
 First, it is absolutely pivotal to begin a game of \tw{}, no matter what edition, with a loud
-and joyous cry of \emph{``¡mientras tanto, los MAGOS DEL TIEMPO!''}. If you can't even pretend
-to speak Spanish, any local equivalent of ``Meanwhile, the Time Wizards!'' is acceptable.
+and joyous cry of \mientrastanto. If you can't even pretend to speak Spanish, any local
+equivalent of ``Meanwhile, the Time Wizards!'' is acceptable. Before beginning play, also
+determine who will be acting as players, controlling a Time Wizard within the game world, and
+who will be the Time Master. The Time Master, also referred to as the TM, is responsible for
+suggesting the powers of the Time Wizards to each player, developing the scenario and objective
+that the Time Wizards are presented with, and rolling dice to oppose the Time Wizards' attempts
+to use their powers.
+
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \begin{examplebox}{Beginning Play}
+      Nicol, Connie, Urist, and Hassan have gathered to play a friendly game of \tw{}. After a
+      call of \mientrastanto{} to declare the session open, Nicol, as the most experienced GM of
+      the group, volunteers as Time Master.
+
+      Since they're all still inexperienced with \tw{}, they decide not to adopt any Doctrines
+      for this session.
+   \end{examplebox}
+   \vspace{15pt}
+\end{wrapfigure}
+
+Typically, the Time Master will be a player familiar with the rules (such as they are) of \tw{},
+or someone with experience running games. Keep in mind, though, that players need to get
+experience somehow and your TM probably wants a chance to play as well, so once you've all played
+a few games, try switching up who is the TM and who is playing.
 
 Conventional \tw{} also suggests the addition of one silly house rule, referred to as a Doctrine,
 by each player. \twsse{} does not officially require Doctrines, but their addition can bring
 excellent further antics with an experienced groups. Doctrines can be strictly mechanical
 (``reroll all threes''), strictly social (``every time you say sentence with three or more Qs
 in it, take a drink''), or a hybrid of the two (``every time a player swears, 1d6 sheep appear
-surrounding their character'').
+surrounding their character''). We suggest that inexperienced
 
 \subsection{Character Creation} \label{ssec:creation}
 Each player in a game of \tw{} controls a single Time Wizard: mighty masters of time and space
@@ -112,21 +166,51 @@ their sudden, unexpected ascendancy to Time Wizardhood, a Time Wizard is an indi
 about an ordinary day who is suddenly and instantaneously imbued with mighty eldritch powers,
 based on some of the last things they did as a mortal man.
 
-Note that they must be going about an ordinary day, no matter how extraordinary the character
-may be: they could be the ruler of all known space, but the day they awakened to Time Wizard
-powers would be the day they went to a wine tasting and caught up on paperwork. It is for this
-reason that Theodore Roosevelt cannot become a Time Wizard. Theodore Roosevelt does not need to
-become a Time Wizard.
+\tw{} does not use elaborate character sheets or blocks of numbers. Each Time Wizard has five
+powers, which are chosen by the player from a list given by the Time Master, and two numerical
+statistics (one of which is simply ten minus the other). There are two types of character
+resources determined by these values, Posits and Power, both of which are spent in order to use
+Time Wizard powers. These are the extent to which a \tw{} player has to keep track of anything.
 
 \subsubsection{Determine Powers} \label{ssec:get-powers}
 First, when creating your Time Wizard, determine what your character's mortal life was like;
 this lets you give the TM ideas about what your character was doing. The TM then proceeds to
 describe the events of your character's life through sets of phrases in the general form
-``verb the noun'': that is, performing some action on some object. The size and number of the
-sets is up to the TM's discretion, but each should contain at least five phrases. If a player
-rejects a set, the TM must provide another; players can choose their powers from exactly one
-set, and can only choose one of the two most recent sets provided by the TM. Reject your first
-two sets, for instance, and you cannot go back and choose the first after you hear the third.
+``verb the noun'': that is, performing some action on some object.
+
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-25pt}
+   \begin{examplebox}{Determining Powers}
+      Connie decides that her character was a bricklayer prior to becoming a Time Wizard. Nicol
+      then chooses a time and date, in this case Wednesday at 4:15 in the Afternoon, at which
+      point he begins listing abilities.
+
+      Nicol decides that each set of powers he provides will have six powers in it: his first
+      set of powers for Connie is ``scale the scaffolding'', ``pour the mortar'', ``hear the
+      foreman'', ``fasten the brick'', ``lower the trowel'', and ``bite the sandwich''. He
+      then gives a set of six other powers to Urist and to Hassan, in order of their seating.
+
+      Reaching Connie again, he provides six more powers: ``traverse the ladder'', ``reach the
+      ground'', ``end the shift'', ``find the bus'', ``take the ride'', and ``call the house''.
+
+      Connie thinks these sets are fine, and chooses five powers from them: ``pour the mortar'',
+      ``bite the sandwich'', ``reach the ground'', ``fasten the brick'', and ``end the shift''.
+   \end{examplebox}
+\end{wrapfigure}
+
+There is no set size for the number of phrases provided by the TM to a player, but each set must
+contain at least five powers. We recommend that each set given to each player is of the same
+size, in order to give each player equal opportunity to choose their powers. Players may select
+five powers from the last two sets provided to them by the TM: they can reject the older set for
+a new one, but cannot revisit it once it has been dismissed.
+
+What a character does in their pre-Time Wizard life is entirely up to the player; however, the
+TM is under no obligation to make exciting characters have exciting powers: they must be
+going about an ordinary day, no matter how extraordinary the character may be. Even if someone
+were could be the ruler of all known space, the day they awakened to Time Wizard powers would be
+the day they went to a wine tasting and caught up on paperwork. It is for this reason that
+Theodore Roosevelt cannot become a Time Wizard. Theodore Roosevelt does not need to become a
+Time Wizard.
 
 \subsubsection{Determine Characteristics} \label{ssec:get-characteristics}
 With your character's five powers chosen, you must then allocate your Time Wizard's
@@ -136,24 +220,9 @@ ability to understand and use their Time Wizard powers. The name of this stat is
 Time Wizard based on something in their past life; for instance, a stage magician may attribute
 their newfound powers to their Showmanship, while a bodybuilder might attribute it to their
 Musculature. For consistency, we will call this a Core Attribute; it can be any attribute of the
-character, usually something they see as a definitive aspect of themselves. A Time Wizard's two
-characteristics must sum to 10: if Captain Ahab the Time Wizard has 7 Desire To Slay The Whale,
-he must then have 3 Will.
+character, usually something they see as a definitive aspect of themselves.
 
-Time Wizards have access to two pools of power: their Power pool, which is determined by Will,
-and their Posits, which are determined by their Core Attribute. A time wizard has a maximum of
-five times their Will in Power, and has three times their Core Attribute plus two in Posits.
-A ``balanced'' Time Wizard has 5 Will and 5 Core Attribute, for a total of 25 Power and 17
-Posits. A full listing of Time Wizard attribute choices and their results is given in
-Table~\ref{tab:cawill}: CA and Will Values.
-
-To ``Posit'' means to put forward a logical proposition, and is also a homophone for ``pause
-it'' if you have the right accent. This suggests the function of a Posit: to declare a Time
-Moment and to expand the function of your Time Wizard powers beyond their mundane trappings.
-Declaring a Time Moment, dilating time, and making outlandish prepositions for your Time Wizard
-powers all require at least one Posit be spent.
-
-\begin{wraptable}{r}{0.5\textwidth}
+\begin{wraptable}{o}{0.5\textwidth}
    \caption{CA and Will Values}
    \label{tab:cawill}
 
@@ -171,15 +240,44 @@ powers all require at least one Posit be spent.
    \end{tabular}
 \end{wraptable}
 
+A Time Wizard's two characteristics must sum to 10: if Captain Ahab the Time Wizard has 7 Desire
+To Slay The Whale, he must then have 3 Will. Increasing one decreases the other, so it's only
+really necessary to track one, but having both written out is an easy reminder of your Time
+Wizard's abilities.
+
+Time Wizards have access to two pools of power: their Power pool, which is determined by Will,
+and their Posits, which are determined by their Core Attribute. A time wizard has a maximum of
+five times their Will in Power, and has three times their Core Attribute plus two in Posits.
+A ``balanced'' Time Wizard has 5 Will and 5 Core Attribute, for a total of 25 Power and 17
+Posits. A full listing of Time Wizard attribute choices and their results is given in
+\hyperref[tab:cawill]{Table \ref*{tab:cawill}: CA and Will Values}.
+
+To ``Posit'' means to put forward a logical proposition, and is also a homophone for ``pause
+it'' if you have the right accent. This suggests the function of a Posit: to declare a Time
+Moment and to expand the function of your Time Wizard powers beyond their mundane trappings.
+Declaring a Time Moment, dilating time, and making outlandish prepositions for your Time Wizard
+powers all require at least one Posit be spent.
+
 Power is more straightforward: you can spend a point of power to either add a single d6 to your
 roll to activate a power, or to increase the breadth of the power you are using. The maximum
 number of dice you can roll is given in the nearby table under Dice Cap; power to breadth
 conversion is up to the TM, but general suggestions are given in
 \hyperref[tab:powersize]{Table \ref*{tab:powersize}: Power to Size Guidelines}.
 
-In general, have more Will if you think you want broad, reliable powers that are relatively
-straightforward, and have more Core Attribute if you want powers to be highly versatile at the
-cost of reliability.
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \begin{examplebox}{Determining Characteristics}
+      Hassan wants his Time Wizard, Thursday at 11:05 in the Morning, to be able to throw more
+      dice, and thus win against the TM more often, but he doesn't want to run out of Power
+      either. He settles for 4 Will and 6 Core Attribute: he can throw $6+2=8$ dice, and has
+      $5\cdot 4=20$ Power and $2+3\cdot 6=20$ Posits.
+   \end{examplebox}
+   %\vspace{20pt}
+\end{wrapfigure}
+
+Generally, Will increases the amount of times you can use your powers by means of increasing
+your maximum Power pool, while Core Attribute makes each use of your power more successful and
+with greater influence. If you're uncertain as to which build to take, we recommend either 5
+of both or 4 of one stat and 6 of the other.
 
 With your characteristics and powers determined, your Time Wizard is ready to play!
 
@@ -209,6 +307,12 @@ A Time Moment is a frozen instant in time, during which the Time Wizards may use
 Movement and direct action are impossible; the only thing that can happen during a Time Moment
 is the use of Time Wizard powers. \hyperref[fig:timemoment]{Figure \ref*{fig:timemoment}: Flow
 of a Time Moment} shows the general structure of a Time Moment in \twsse{}.
+
+The colours in the figure indicate a grouping according to the section in the rules: red is
+covered under \nameref{ssec:begin-moment}, yellow under \nameref{ssec:power-declaration}, green
+under \nameref{ssec:roll-phase}, cyan under \nameref{ssec:resolve-power}, blue under
+\nameref{ssec:time-paradox}, purple under \nameref{ssec:time-dilation}, and
+\nameref{ssec:end-moment}.
 
 \begin{figure}
    \caption{Flow of a Time Moment}
@@ -263,12 +367,6 @@ of a Time Moment} shows the general structure of a Time Moment in \twsse{}.
    \end{tikzpicture}
 \end{figure}
 
-The colours in the figure indicate a grouping according to the section in the rules: red is
-covered under \nameref{ssec:begin-moment}, yellow under \nameref{ssec:power-declaration}, green
-under \nameref{ssec:roll-phase}, cyan under \nameref{ssec:resolve-power}, blue under
-\nameref{ssec:time-paradox}, purple under \nameref{ssec:time-dilation}, and
-\nameref{ssec:end-moment}.
-
 \subsection{Beginning a Time Moment} \label{ssec:begin-moment}
 A Time Wizard may declare a Time Moment at any time for the cost of one Posit; if they have no
 Posits available, they cannot declare a Time Moment, and are helpless save for the intervention
@@ -276,9 +374,15 @@ of their fellow Time Wizards. As soon as the Time Moment is declared, time freez
 Time Wizards step away from reality, ready to work their havoc upon it.
 
 The Time Wizard who declares the Time Moment regains one third of their maximum Power, rounded
-down, upon declaration; however, they must declare a power to use during this Time Moment. Other
-Time Wizards can either choose to declare a power or to regain one Posit for each power used in
-this Time Moment.
+down, upon declaration; however, they must declare a power to use during this Time Moment, which
+means that declaring a Time Moment purely to recharge Power can be a dangerous proposition: as
+the player must roll against the TM, this can reduce the amount of power regained unless the
+player is willing to gamble on the TM's imagination and what can happen to their Time Wizard
+after a low-power Roll.
+
+Time Wizards who did not declare the Time Moment can choose as to whether or not they
+participate. Those who do move on to declaring powers; those who do not regain one Posit for
+each power being used in this Time Moment, including the power used by the declarer.
 
 \subsection{Power Declaration} \label{ssec:power-declaration}
 The Time Wizards who decide to participate in a Time Moment must then declare which of their
@@ -288,7 +392,7 @@ given in \hyperref[tab:powersize]{Table \ref*{tab:powersize}: Power to Size Guid
 good to ask the TM for specific sizes of objects to determine the Power that needs to be spent
 to influence it.
 
-\begin{wraptable}{r}{0.5\textwidth}
+\begin{wraptable}{o}{0.5\textwidth}
    \caption{Power to Size Guidelines}
    \label{tab:powersize}
 
@@ -309,6 +413,10 @@ to influence it.
    \end{tabular}
 \end{wraptable}
 
+The reason that Power amount is declared prior to dice being rolled is to prevent players
+changing their range or dice count in response to knowledge of the Time Master, and to place a
+limit on the range that the Time Master can operate on if they win.
+
 Further Power-to-area tiers can be added at the TM's discretion. So long as the Time Wizard has
 the power in their pool, there is no limiting factor for spending it on area of
 effect.\footnote{Yes, we know it's actually a volume of effect.} Suggested values for 12 Power
@@ -319,8 +427,8 @@ have an understanding.
 
 When using Power to increase the number of dice rolled when activating a power, note that the
 number of added dice cannot exceed the Time Wizard's Core Attribute score. The maximum number
-of dice a Time Wizard with a given attribute spread can roll is given in Section 3, in
-\hyperref[tab:cawill]{Table \ref*{tab:cawill}: CA and Will Values}.
+of dice a Time Wizard with a given attribute spread can roll is given under Section
+\ref*{sec:setup}, in \hyperref[tab:cawill]{Table \ref*{tab:cawill}: CA and Will Values}.
 
 \subsection{The Roll Phase} \label{ssec:roll-phase}
 Once the amount of Power used by each Time Wizard is determined, each Time Wizard rolls their
@@ -359,6 +467,29 @@ of the outcome, leaving Captain Ahab with two points of Wrath (if he loses) or t
 Wrath (the two remaining, plus the one gained by a successful roll).
 
 \subsection{Resolving Powers} \label{ssec:resolve-power}
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \begin{examplebox}{Power Resolution}
+      Urist decides to use his power ``swing the club'' over the size of a city block, and beats
+      the TM during the roll phase. He proposes the following chain of logic:
+
+      \textbf{(1)}
+         A square has four sides. A diamond has four sides. Thus, a square is a diamond.
+      
+      \textbf{(2)}
+         Diamonds are a suit of playing cards. Clubs are a suit of playing cards. Thus, diamonds 
+         are clubs.
+      
+      \textbf{(3)}
+         To swing something means to move it in a somewhat curved path. A thrown object moves in 
+         a curved path due to gravity. Thus, throwing something is a type of swinging something.
+
+      \textbf{(4)}
+         The town square is a square, thus it is a diamond, thus it is a club. Urist can
+         ``swing the club'' by hefting the town square and throwing it into the river as a
+         makeshift dam.
+   \end{examplebox}
+\end{wrapfigure}
+
 Depending on the outcome of rolling for power activation, either the Time Wizard or the TM
 decides how a given power resolves. Every power, you recall, is of the form ``verb the noun'':
 to resolve a power, the player or TM must describe how some intended result is an action
@@ -367,17 +498,32 @@ used to shred the unnecessary bits of a loaf of bread and a cow, leaving only a 
 behind, or could be used to tear apart the cosmic essence of a cheeseburger to turn it into
 an eldritch hand grenade. Time Wizard powers are very versatile, if you have the right argument.
 
-In general, it costs a Time Wizard one Posit to declare that one object or one action is some
-different action. For instance, it does not cost a Posit to declare that a crate is a box, but
-declaring that a rocket launcher (which has a scope on it) is itself a scope would cost one
-Posit. At the group's discretion, Posits can also be charged for highly general powers, such as
-``ready the materials'' or ``make the delivery'', in order to maintain some illusion of balance.
-The total number of Posits which can be spent on a single resolution is the Time Wizard's Core
-Attribute value.
+In general, it costs a Time Wizard some number of Posits to declare that one object or one
+action is some different action. For instance, it does not cost a Posit to declare that a crate
+is a box, but declaring that a rocket launcher (which has a scope on it) is itself a scope would
+cost some Posits as determined by the TM. At the group's discretion, Posits can also be charged
+for highly general powers, such as ``ready the materials'' or ``make the delivery'', in order to
+maintain some illusion of balance. The total number of Posits which can be spent on a single
+resolution cannot exceed the Time Wizard's Core Attribute score.
+
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \begin{examplebox}{Posit Costs}
+      Looking at Urist's line of logic from the above examples, the TM notes that his first
+      statement is equating two objects with some shared, defining property: squares and
+      diamonds. For this, he charges one Posit. Urist's second statement equates two objects
+      within some more general category; for this, the TM charges two Posits. The third
+      statement is similar to the first, equating two things both defined by a curved trajectory,
+      so the TM charges one posit. The fourth statement just combines existing statements, and
+      thus uses no Posits.
+
+      The total cost of Urist's resolution, then, is three Posits.
+   \end{examplebox}
+\end{wrapfigure}
 
 When the TM resolves a power, they are not limited by Posits and Core Attribute, but must keep
 the effect pertinent to the ability at hand and within the same range specified when the Time
-Wizard first declared their power.
+Wizard first declared their power. When the TM is done resolving a power, players are encouraged
+to 
 
 Resolve powers in the order that dice were rolled. When all powers have been resolved, the
 players have a choice: either have the Time Moment end, causing all consequences from it to
@@ -431,9 +577,9 @@ wish I had a part in.
 \tw{} would not exist as it does today were it not for \namefag[!ScSfaqO.RY]{DM Kroft} regaling
 /tg/ with his tales of shenanigans, and would not exist at all were it not for a bold unknown
 individual in Kroft's group who shouted the first ``Mientras tanto, los MAGOS DEL TIEMPO!'' over
-pizza. The creators are named in \emph{Classic Edition} as Cristián Andreu (\namefag{DM Kroft}
-himself), Gonzalo Jimenez and Alain Raymond, so buy those guys a beer if you see them. They
-deserve it.
+pizza. The creators are named in \emph{Classic Edition} as Cristi\'{a}n Andreu (\namefag{DM
+Kroft} himself), Gonzalo Jimenez and Alain Raymond, so buy those guys a beer if you see them.
+They deserve it.
 
 \emph{Time Wizards: First Edition} was compiled from the imagination of \anon{} by
 \namefag{Art\_Wizard}, providing the first publicly-available ruleset for the game.
