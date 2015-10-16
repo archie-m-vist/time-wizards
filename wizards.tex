@@ -22,11 +22,11 @@
 \newcommand{\tw}{\emph{Time Wizards}}
 \newcommand{\sse}{\emph{Sober and Serious Edition}}
 \newcommand{\rfe}{\emph{Revised First Edition}}
-\newcommand{\vers}{$0.2.1 \beta$}
+\newcommand{\vers}{$0.2.2 \beta$}
 
 \newtoggle{paper}
 \toggletrue{paper}
-
+f
 \tikzstyle{decision} = [diamond, draw, 
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, 
@@ -43,6 +43,8 @@
 
 \begin{document}
 
+\setcounter{page}{-3}
+
 \includepdf[fitpaper]{cover}
 \pagestyle{empty}
 \cleardoublepage
@@ -52,7 +54,6 @@
 \cleardoublepage
 
 \pagestyle{plain}
-\setcounter{page}{1}
 
 \section{Introduction} \label{sec:intro}
 \subsection{The Game of \tw{}} \label{ssec:gameintro}
@@ -261,7 +262,7 @@ powers all require at least one Posit be spent.
 \begin{wrapfigure}{o}{0.5\textwidth}
    \begin{examplebox}{Determining Characteristics}
       Hassan wants his Time Wizard, Thursday at 11:05 in the Morning, to be able to throw more
-      dice, and thus win against the TM more often, but he doesn't want to run out of Power
+      dice, and thus win against Nicol more often, but he doesn't want to run out of Power
       either. He settles for 4 Will and 6 Core Attribute: he can throw $6+2=8$ dice, and has
       $5\cdot 4=20$ Power and $2+3\cdot 6=20$ Posits.
    \end{examplebox}
@@ -373,6 +374,16 @@ Posits available, they cannot declare a Time Moment, and are helpless save for t
 of their fellow Time Wizards. As soon as the Time Moment is declared, time freezes and the
 Time Wizards step away from reality, ready to work their havoc upon it.
 
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
+   \begin{examplebox}{Beginning of a Time Moment}
+      Urist spends a Posit to declare a Time Moment, and regains 11 power out of his max of 35.
+      Connie declines to participate while Hassan decides to use a power: with two powers being
+      used, Connie regains two Posits.
+   \end{examplebox}
+   \vspace{20pt}
+\end{wrapfigure}
+
 The Time Wizard who declares the Time Moment regains one third of their maximum Power, rounded
 down, upon declaration; however, they must declare a power to use during this Time Moment, which
 means that declaring a Time Moment purely to recharge Power can be a dangerous proposition: as
@@ -391,6 +402,23 @@ Power adds one die to the amount rolled, or increases the size of the effect. Ef
 given in \hyperref[tab:powersize]{Table \ref*{tab:powersize}: Power to Size Guidelines}; it'
 good to ask the TM for specific sizes of objects to determine the Power that needs to be spent
 to influence it.
+
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \begin{examplebox}{Declaring Powers}
+      Nicol decides on an Order Rating of 4.
+
+      Urist announces that he will ``swing the club'' over the range of a city block, and will
+      roll all five of his dice: this costs him 8 Power.
+
+      Hassan will ``welcome the customer'' on a single other individual, and will roll six dice:
+      this costs him 7 Power.
+   \end{examplebox}
+   \vspace{25pt}
+\end{wrapfigure}
+
+The reason that Power amount is declared prior to dice being rolled is to prevent players
+changing their range or dice count in response to knowledge of the Time Master, and to place a
+limit on the range that the Time Master can operate on if they win.
 
 \begin{wraptable}{o}{0.5\textwidth}
    \caption{Power to Size Guidelines}
@@ -411,11 +439,8 @@ to influence it.
       10 & A galaxy\\
       11 & The entire universe
    \end{tabular}
+   \vspace{-24pt}
 \end{wraptable}
-
-The reason that Power amount is declared prior to dice being rolled is to prevent players
-changing their range or dice count in response to knowledge of the Time Master, and to place a
-limit on the range that the Time Master can operate on if they win.
 
 Further Power-to-area tiers can be added at the TM's discretion. So long as the Time Wizard has
 the power in their pool, there is no limiting factor for spending it on area of
@@ -431,6 +456,21 @@ of dice a Time Wizard with a given attribute spread can roll is given under Sect
 \ref*{sec:setup}, in \hyperref[tab:cawill]{Table \ref*{tab:cawill}: CA and Will Values}.
 
 \subsection{The Roll Phase} \label{ssec:roll-phase}
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-15pt}
+   \begin{examplebox}{The Roll Phase}
+      As Urist declared the Time Moment, he rolls first: he rolls a 6, a 4, two 3s, and a 2 for
+      a total of 18. As the Order Rating is 4, Nicol rolls 4d6, and gets a 5, a 4, and two 1s
+      for a total of 11. Urist wins the roll. Urist gets to resolve ``swing the club'', and
+      gains a point of Wrath.
+
+      Hassan rolls after Nicol: he gets two 4s, a 3, two 2s, and a 1 for a total of 12. Nicol
+      again rolls 4d6, and gets a 6, two 5s, and a 3 for a total of 20. Nicol gets to resolve
+      ``welcome the customer'', but Hassan does not gain any Wrath.
+   \end{examplebox}
+   \vspace{20pt}
+\end{wrapfigure}
+
 Once the amount of Power used by each Time Wizard is determined, each Time Wizard rolls their
 chosen number of dice, beginning with the player who declared the Time Moment and moving through
 the rest of the active Time Wizards in some order from there. (While the TM can decide this, we
@@ -468,9 +508,10 @@ Wrath (the two remaining, plus the one gained by a successful roll).
 
 \subsection{Resolving Powers} \label{ssec:resolve-power}
 \begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
    \begin{examplebox}{Power Resolution}
       Urist decides to use his power ``swing the club'' over the size of a city block, and beats
-      the TM during the roll phase. He proposes the following chain of logic:
+      Nicol during the roll phase. He proposes the following chain of logic:
 
       \textbf{(1)}
          A square has four sides. A diamond has four sides. Thus, a square is a diamond.
@@ -488,6 +529,7 @@ Wrath (the two remaining, plus the one gained by a successful roll).
          ``swing the club'' by hefting the town square and throwing it into the river as a
          makeshift dam.
    \end{examplebox}
+   \vspace{20pt}
 \end{wrapfigure}
 
 Depending on the outcome of rolling for power activation, either the Time Wizard or the TM
@@ -506,24 +548,34 @@ for highly general powers, such as ``ready the materials'' or ``make the deliver
 maintain some illusion of balance. The total number of Posits which can be spent on a single
 resolution cannot exceed the Time Wizard's Core Attribute score.
 
+In general, do not charge Posits at all for something that is true: stating that ``a cat is an
+animal'' does not require any reality warping, it's simply a fact. While the partiuclars of
+Posit costing are entirely up to the TM, and this text should not be considered a replacement
+for the TM's judgement, we recommend that simple equivalences based on similarities in
+definition or inherent broader categories cost one Posit, and that equivalences based on shakier
+ground such as a common category from a slang or highly specific use of a word cost two Posits. 
+Charging three or more Posits for a single statement is discouraged in general, and should only
+be used for when the reasoning truly stretches credibility. Combining existing statements
+transitively does not cost any Posits unless new assertions are made.
+
 \begin{wrapfigure}{o}{0.5\textwidth}
    \begin{examplebox}{Posit Costs}
-      Looking at Urist's line of logic from the above examples, the TM notes that his first
-      statement is equating two objects with some shared, defining property: squares and
-      diamonds. For this, he charges one Posit. Urist's second statement equates two objects
-      within some more general category; for this, the TM charges two Posits. The third
-      statement is similar to the first, equating two things both defined by a curved trajectory,
-      so the TM charges one posit. The fourth statement just combines existing statements, and
-      thus uses no Posits.
+      Nicol charges 1 Posit for Urist's first statement, since he's noting a common trait in the
+      definition of the two shapes. He also charges 1 posit for the third, for the same reason.
+      He charges 2 Posits for the second statement, since Urist is noting a case-specific broad
+      category. The fourth statement just combines existing statements and a truth, so it costs
+      no Posits.
 
-      The total cost of Urist's resolution, then, is three Posits.
+      The total cost of Urist's resolution, then, is four Posits.
    \end{examplebox}
+   \vspace{15pt}
 \end{wrapfigure}
 
 When the TM resolves a power, they are not limited by Posits and Core Attribute, but must keep
 the effect pertinent to the ability at hand and within the same range specified when the Time
 Wizard first declared their power. When the TM is done resolving a power, players are encouraged
-to 
+to ask questions about any details they feel the TM has not mentioned if they would be relevant
+to future powers. If possible, do so without alerting the TM to your shenanigans.
 
 Resolve powers in the order that dice were rolled. When all powers have been resolved, the
 players have a choice: either have the Time Moment end, causing all consequences from it to
@@ -544,6 +596,19 @@ caused the paradox declared the Time Moment, and otherwise acts like all other D
 Moments as explained below.
 
 \subsection{Time Dilation} \label{ssec:time-dilation}
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-20pt}
+   \begin{examplebox}{Time Dilation}
+      Hassan dislikes how Nicol chooses to resolve ``welcome the customer'', so he decides
+      to spend two Posits to dilate time. As this is a Dilated Time Moment, he does not regain
+      any Power for declaring it.
+
+      Connie decides to use a power, Urist declines. Dilation prevents Urist from regaining any
+      Posits.
+   \end{examplebox}
+   \vspace{25pt}
+\end{wrapfigure}
+
 At the end of a Time Moment, if circumstances are unfavourable to the Time Wizards, one may
 choose to spend additional Posits to produce a Time Moment inside a Time Moment. A Dilated Time
 Moment behaves in most respects similarly to a Time Moment, with some slight differences.
@@ -553,10 +618,24 @@ by 1. This means that the first layer of Time Dilation requires two Posits; if c
 still unfavourable, dilating a second time would require three, and so on. This increased cost
 makes it difficult to repeatedly dilate time until a perfectly desirable outcome is obtained.
 
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
+   \begin{examplebox}{Power Amplification}
+      The Time Moment proceeds normally, but after both players resolve their powers, the
+      Time Dilation increases the effect of their powers: Connie's ``fasten the brick'' does not
+      just secure the town square in its new position of the riverbed, but also fastens the clay
+      in the riverbed into bricks. Hassan's ``peruse the merchandise'' manages to resolve the
+      issue from his welcome customer, but also traps the party in a labyrinth of tourist
+      memorabilia.
+   \end{examplebox}
+   \vspace{20pt}
+\end{wrapfigure}
+
 Dilating Time, unlike declaring a regular Time Moment, does not restore any of the declaring
 Time Wizard's Power, nor does it restore any Posits to inactive Time Wizards. Again, the purpose
-of this is to prevent infinite time dilation loops, and to make resolving a Time Moment better
-to allow resources.
+of this is to prevent infinite time dilation loops, and to make resolving a Time Moment a better
+choice, since this allows the party to regain resources. (It is possible to recover Power, but
+not Posits, in a Time Moment by causing a paradox.)
 
 Finally, all effects of powers in dilated time are amplified, increasing for each level of
 dilation. For instance, a simple ``water the flowers'' that would, in a standard Time Moment,
@@ -566,8 +645,32 @@ world. The exact nature of the effect increase is up to the resolving player and
 
 \subsection{Ending a Time Moment} \label{ssec:end-moment}
 Whether Time Dilation happens or not, the Time Moment must end, and reality then deals with the
-consequences of the Time Wizards' actions. Return to the top of the Playing the Game section
-until the Time Wizards complete their objective.
+consequences of the Time Wizards' actions. Actions happen in the order they were resolved, with
+powers from each level of dilation occurring after the previous.
+
+\begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
+   \begin{examplebox}{Time Resumes}
+      The instant that time resumes, Urist hurtles the town square towards the river, a mob of
+      ravenous tourists descend upon the city, the city is filled with a complicated maze of
+      memorabilia to occupy the tourists (and everyone else in the city), and the town square
+      snaps down into the riverbed with enough force to fire the clay into bricks.
+   \end{examplebox}
+   \vspace{20pt}
+\end{wrapfigure}
+
+When the TM is still describing the immediate aftermath of a Time Moment, a new Time Moment
+cannot be declared, as all of these events occur simultaneously with no passage of time to stop.
+Thus, if a Time Wizard is placed in an instantaneously fatal situation (dropped into the core
+of the sun, packed into a space too small for their body) they can be killed; it's advisable to
+deal with this by Dilating Time before giving time a chance to resume.
+
+Once time is moving normally again, the Time Wizards may declare another Time Moment, or wait
+to see how the TM describes events playing out. They may also argue that they have accomplished
+their objective; once they have, to the TM's satisfaction, the game is over and the Time Wizards
+are successful. Otherwise, repeat Time Moments and events until they are.
+
+\clearpage
 
 \section{Credits}
 As a whole, \twsse{} belongs to the people of /tg/. All work is done on the shoulders of giants,
@@ -581,8 +684,8 @@ pizza. The creators are named in \emph{Classic Edition} as Cristi\'{a}n Andreu (
 Kroft} himself), Gonzalo Jimenez and Alain Raymond, so buy those guys a beer if you see them.
 They deserve it.
 
-\emph{Time Wizards: First Edition} was compiled from the imagination of \anon{} by
-\namefag{Art\_Wizard}, providing the first publicly-available ruleset for the game.
+\emph{Time Wizards: First Edition} was compiled from the original storytimes and the imagination
+of \anon{} by \namefag{Art\_Wizard}, providing the first publicly available ruleset for the game.
 
 \emph{Time Wizards: Revised First Edition} was in turn developed from \emph{First Edition} by a
 valiant \anon{}, providing the first full version of \tw{} to /tg/ that is in the form of a
@@ -605,7 +708,8 @@ happened to take a photo of it.
 Credit for the cover image and title goes to \anon{} of /tg/.
 
 \section{Future Plans}
-First and foremost, I need to typeset this document up nicer so it's not a seamless wall of text
-and has nice little things like examples and coloured boxes. Everyone likes coloured boxes.
+Preparation for the first ``public'' playtest is well underway, so the priority is still on
+making this document clearer and more like an actual rulebook (to the degree that such is
+possible for \tw{}, \sse{} or no). Improving the typesetting is also a general goal.
 
 \end{document}
