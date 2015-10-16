@@ -1,4 +1,6 @@
-wizards.aux
-wizards.log
-wizards.out
+*.aux
+*.log
+*.out
+wizards.toc
 wizards.pdf
+doc.pdf
