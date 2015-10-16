@@ -24,9 +24,6 @@
 \newcommand{\rfe}{\emph{Revised First Edition}}
 \newcommand{\vers}{$0.2.2 \beta$}
 
-\newtoggle{paper}
-\toggletrue{paper}
-f
 \tikzstyle{decision} = [diamond, draw, 
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, 
@@ -94,37 +91,8 @@ any feedback at \verb|archie.m.vist@gmail.com|. The latest version of the docume
 on GitHub at \url{https://github.com/archie-m-vist/time-wizards/releases}.
 
 For reference, this is version \vers{} of \twsse. This version introduces time paradox
-mechanics, reorganises several sections, and introduces a series of play examples.
-
-\iftoggle{paper}{}{
-\subsection{Differences from \emph{Time Wizards: Revised First Edition}} \label{ssec:verdiff}
-This section assumes some familiarity with \emph{Time Wizards: Revised First Edition}. If you're
-playing \tw{} for the first time using \sse{} for some reason, feel free to skip to the next
-section.
-
-The basics of character creation remain the same as in \rfe{}: each character selects five ``verb
-the noun'' phrases from lists provided by the Time Master, which serve as their Time Wizard
-powers. Added in \sse{} are two numeric values, which are given values from 1-9 and must sum to
-10. These characteristics determine the scale and variety of effects that a Time Wizard's powers
-can achieve. For the particulars on characteristics and their uses, see
-\nameref{ssec:get-characteristics}.
-
-In terms of mechanics, the classic \rfe{} of \tw{} is a completely different game from \sse{}.
-In particular, the entire dice slap system from classic \tw{} has been removed; while some may
-say this removes a characteristic part of what makes a game of \tw{} what it is, it was removed
-for several reasons: first and foremost, to make the game more accessible. As a rule, people
-(even many fa/tg/uys) tend to avoid physical pain; as such, most any other RPG system would be
-easier to pitch to a group than a game of \rfe{} or other slap system \tw{}.
-
-Further, a slap system offers a significant advantage to those with stronger physical
-characteristics, such as longer arms or better pain tolerance; the shift to a dice-based system
-helps balance things physically, something typically welcomed by a group of the sort of people
-who gather around a table of dice and pretend to be wizards.
-
-For the new power mechanics, see \nameref{sec:time-moment}.
-
-The referenced sections should be sufficient for someone familiar with \emph{Time Wizards:
-Revised First Edition} to play \sse{}.}
+mechanics, reorganises several sections, and introduces a series of play examples; in addition,
+we have split the comparisons to previous versions of \tw{} into its own document.
 
 \section{Setting Up} \label{sec:setup}
 First, it is absolutely pivotal to begin a game of \tw{}, no matter what edition, with a loud
@@ -137,6 +105,7 @@ that the Time Wizards are presented with, and rolling dice to oppose the Time Wi
 to use their powers.
 
 \begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
    \begin{examplebox}{Beginning Play}
       Nicol, Connie, Urist, and Hassan have gathered to play a friendly game of \tw{}. After a
       call of \mientrastanto{} to declare the session open, Nicol, as the most experienced GM of
@@ -260,6 +229,7 @@ Declaring a Time Moment, dilating time, and making outlandish prepositions for y
 powers all require at least one Posit be spent.
 
 \begin{wrapfigure}{o}{0.5\textwidth}
+   \vspace{-10pt}
    \begin{examplebox}{Determining Characteristics}
       Hassan wants his Time Wizard, Thursday at 11:05 in the Morning, to be able to throw more
       dice, and thus win against Nicol more often, but he doesn't want to run out of Power
